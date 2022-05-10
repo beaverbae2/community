@@ -2,6 +2,7 @@ package com.beaver.community.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
+@Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
     @Id
@@ -30,7 +31,7 @@ public class User {
     private LocalDateTime regTime;
     private LocalDateTime modTime;
 
-    @OneToMany(mappedBy = "USER")
+    @OneToMany(mappedBy = "user")
     private List<Board> boards;
 
     @Builder
