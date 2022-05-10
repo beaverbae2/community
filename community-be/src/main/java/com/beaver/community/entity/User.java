@@ -4,13 +4,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,6 +29,9 @@ public class User {
 
     private LocalDateTime regTime;
     private LocalDateTime modTime;
+
+    @OneToMany(mappedBy = "USER")
+    private List<Board> boards;
 
     @Builder
     public User(String email, String password) {
