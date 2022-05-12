@@ -1,5 +1,6 @@
 package com.beaver.community.entity;
 
+import com.beaver.community.model.user.UserUpdateRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +23,11 @@ public class User {
     private String email;
 
     @NotNull
-    @Size(min = 8, max = 20)
+    @Column(length = 20)
+    private String nickName;
+
+    @NotNull
+    @Column(length = 20)
     private String password;
 
     @NotNull
@@ -35,9 +40,18 @@ public class User {
     private List<Board> boards;
 
     @Builder
-    public User(String email, String password) {
+    public User(String email, String nickName, String password) {
         this.email = email;
+        this.nickName = nickName;
         this.password = password;
         this.statue = true;
     }
+
+    public User update(UserUpdateRequest request) {
+        this.nickName = request.getNickname();
+        this.password = request.getPassword();
+
+        return this;
+    }
+
 }
